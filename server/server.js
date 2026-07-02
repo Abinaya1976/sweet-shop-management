@@ -1,10 +1,13 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
+require("dotenv").config();
+
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const testRoutes = require("./routes/testRoutes");
+const branchRoutes = require("./routes/branchRoutes");
 
-require("dotenv").config();
+
 
 connectDB();
 
@@ -13,6 +16,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/branches", branchRoutes);
+app.use("/api/test", testRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("Sweet Shop API Running");
