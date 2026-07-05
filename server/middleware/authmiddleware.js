@@ -19,7 +19,7 @@ const authMiddleware = (req, res, next) => {
 
     // Save user information
     req.user = decoded;
-
+    console.log("Decoded User:", req.user);
     next();
 
   } catch (error) {

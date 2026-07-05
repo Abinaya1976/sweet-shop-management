@@ -1,21 +1,40 @@
-const Capacity = require("../models/Capacity");
-
-// Add Capacity
 const addCapacity = async (req, res) => {
-  try {
-    const capacity = await Capacity.create(req.body);
 
-    res.status(201).json({
-      message: "Capacity Added Successfully",
-      capacity,
-    });
+    try {
 
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
-};
+        const { branch, product, dailyCapacity } = req.body;
+
+        const existingCapacity = await Capacity.findOne({
+            branch,
+            product
+        });
+
+        if (existingCapacity) {
+            return res.status(400).json({
+                message: "Capacity already exists for this branch and product"
+            });
+        }
+
+        const capacity = await Capacity.create({
+            branch,
+            product,
+            dailyCapacity
+        });
+
+        res.status(201).json({
+            message: "Capacity Added Successfully",
+            capacity
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+}
 
 // Get All Capacities
 const getCapacities = async (req, res) => {

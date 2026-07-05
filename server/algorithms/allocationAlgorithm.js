@@ -1,4 +1,5 @@
 const Capacity = require("../models/Capacity");
+const OrderAllocation = require("../models/OrderAllocation");
 
 const allocateOrder = async (productId, quantity, deliveryDate) => {
 
@@ -14,10 +15,35 @@ const allocateOrder = async (productId, quantity, deliveryDate) => {
         Math.ceil((delivery - today) / (1000 * 60 * 60 * 24))
     );
 
-    const branches = capacities.map(capacity => ({
+    const branches = [];
+
+for (const capacity of capacities) {
+
+    // Calculate maximum production until delivery
+    const totalCapacity = capacity.dailyCapacity * days;
+
+    // Find all allocations for this branch
+    const allocations = await OrderAllocation.find({
+        branch: capacity.branch._id
+    });
+
+    // Sum assigned quantities
+    const alreadyAssigned = allocations.reduce(
+        (sum, allocation) => sum + allocation.quantityAssigned,
+        0
+    );
+
+    // Remaining capacity
+    const availableCapacity = Math.max(
+        totalCapacity - alreadyAssigned,
+        0
+    );
+
+    branches.push({
         branch: capacity.branch,
-        availableCapacity: capacity.dailyCapacity * days
-    }));
+        availableCapacity
+    });
+}
 
     branches.sort(
         (a, b) => b.availableCapacity - a.availableCapacity

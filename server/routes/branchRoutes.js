@@ -9,12 +9,17 @@ const {
   deleteBranch,
 } = require("../controllers/branchController");
 
-router.post("/", addBranch);
+const protect = require("../middleware/authMiddleware");
+const authorizeRoles = require("../middleware/roleMiddleware");
 
+// Public Route
 router.get("/", getBranches);
 
-router.put("/:id", updateBranch);
+// Admin Routes
+router.post("/", protect, authorizeRoles("admin"), addBranch);
 
-router.delete("/:id", deleteBranch);
+router.put("/:id", protect, authorizeRoles("admin"), updateBranch);
+
+router.delete("/:id", protect, authorizeRoles("admin"), deleteBranch);
 
 module.exports = router;
