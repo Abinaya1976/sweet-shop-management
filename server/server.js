@@ -10,6 +10,7 @@ const capacityRoutes = require("./routes/capacityRoutes");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 connectDB();
 
 const app = express();
@@ -23,6 +24,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/capacities", capacityRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/admin",adminRoutes);
 app.get("/", (req, res) => {
   res.send("Sweet Shop API Running");
 });

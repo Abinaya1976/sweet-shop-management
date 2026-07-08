@@ -1,0 +1,37 @@
+.navbar{
+
+height:70px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:white;
+
+padding:20px;
+
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+}
+
+.navbar-user{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.navbar-user img{
+
+width:45px;
+
+height:45px;
+
+border-radius:50%;
+
+}

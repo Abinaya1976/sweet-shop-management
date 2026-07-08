@@ -1,68 +1,321 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
+  min-height: 100vh;
+  background: #080b14;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+#root {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.dashboard-shell {
+  min-height: 100vh;
+  padding: 24px;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.dashboard-shell.dark {
+  background: radial-gradient(circle at top left, #2b1d44 0%, #0f172a 45%, #030712 100%);
+  color: #f8fafc;
+}
+
+.dashboard-shell.light {
+  background: linear-gradient(135deg, #fff7ed 0%, #ffe4e6 45%, #e0f2fe 100%);
+  color: #111827;
+}
+
+.hero-card,
+.card,
+.stat-card,
+.message-bar {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+}
+
+.dashboard-shell.light .hero-card,
+.dashboard-shell.light .card,
+.dashboard-shell.light .stat-card,
+.dashboard-shell.light .message-bar {
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.08);
+}
+
+.hero-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.dashboard-shell.light .hero-card {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #f59e0b;
+}
+
+.hero-card h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.hero-copy {
+  margin: 0;
+  max-width: 700px;
+  color: #cbd5e1;
+}
+
+.dashboard-shell.light .hero-copy {
+  color: #475569;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.primary-btn,
+.ghost-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.primary-btn:hover,
+.ghost-btn:hover {
+  transform: translateY(-1px);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #fb923c 0%, #f43f5e 100%);
+  color: white;
+}
+
+.ghost-btn {
+  background: rgba(255, 255, 255, 0.14);
+  color: inherit;
+}
+
+.dashboard-shell.light .ghost-btn {
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.message-bar {
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.dashboard-shell.light .stat-card {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.stat-accent {
+  font-size: 1.3rem;
+}
+
+.stat-card strong {
+  font-size: 1.6rem;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.card {
+  padding: 18px;
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.dashboard-shell.light .card {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.section-heading span {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-form input {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+}
+
+.dashboard-shell.light .auth-form input {
+  border-color: rgba(15, 23, 42, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.list-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dashboard-shell.light .list-item {
+  background: rgba(248, 250, 252, 0.95);
+}
+
+.list-item strong,
+.list-item p {
+  display: block;
+  margin: 0;
+}
+
+.list-item p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.empty-state {
+  margin: 0;
+  opacity: 0.7;
+}
+
+.table-card {
+  overflow: hidden;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-shell.light th,
+.dashboard-shell.light td {
+  border-bottom-color: rgba(15, 23, 42, 0.08);
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.status-pill.pending {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+}
+
+.status-pill.allocated {
+  background: rgba(59, 130, 246, 0.18);
+  color: #60a5fa;
+}
+
+.status-pill.completed {
+  background: rgba(34, 197, 94, 0.18);
+  color: #4ade80;
+}
+
+@media (max-width: 900px) {
+  .panel-grid {
+    grid-template-columns: 1fr;
   }
-  a:hover {
-    color: #747bff;
+}
+
+@media (max-width: 640px) {
+  .dashboard-shell {
+    padding: 14px;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .hero-card {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

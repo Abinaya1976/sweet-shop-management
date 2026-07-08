@@ -19,10 +19,16 @@ const capacitySchema = new mongoose.Schema(
       required: true,
       min: 0,
     },
-  },
+  
+  allocatedToday: {
+    type: Number,
+    default: 0
+}
+},
   {
     timestamps: true,
   }
 );
+
 
 module.exports = mongoose.model("Capacity", capacitySchema);

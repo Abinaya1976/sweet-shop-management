@@ -4,18 +4,21 @@ const router = express.Router();
 
 const {
     getTodayOrders,
-    getFutureOrders
+    getFutureOrders,
+    getProductionSchedule,
+    getRemainingCapacity,
+    completeOrder
 } = require("../controllers/dashboardController");
 
 const protect = require("../middleware/authMiddleware");
 const authorizeRoles = require("../middleware/roleMiddleware");
 
 // Get Today's Orders
-router.get(
-    "/today",
+router.put(
+    "/complete/:id",
     protect,
     authorizeRoles("manager", "admin"),
-    getTodayOrders
+    completeOrder
 );
 
 // Get Future Orders

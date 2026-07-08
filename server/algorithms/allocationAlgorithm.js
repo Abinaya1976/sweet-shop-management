@@ -8,6 +8,7 @@ const allocateOrder = async (productId, quantity, deliveryDate) => {
     }).populate("branch");
 
     const today = new Date();
+
     const delivery = new Date(deliveryDate);
 
     const days = Math.max(
@@ -17,33 +18,30 @@ const allocateOrder = async (productId, quantity, deliveryDate) => {
 
     const branches = [];
 
-for (const capacity of capacities) {
+    for (const capacity of capacities) {
 
-    // Calculate maximum production until delivery
-    const totalCapacity = capacity.dailyCapacity * days;
+        const totalCapacity = capacity.dailyCapacity * days;
 
-    // Find all allocations for this branch
-    const allocations = await OrderAllocation.find({
-        branch: capacity.branch._id
-    });
+        const allocations = await OrderAllocation.find({
+            branch: capacity.branch._id
+        });
 
-    // Sum assigned quantities
-    const alreadyAssigned = allocations.reduce(
-        (sum, allocation) => sum + allocation.quantityAssigned,
-        0
-    );
+        const alreadyAssigned = allocations.reduce(
+            (sum, allocation) => sum + allocation.quantityAssigned,
+            0
+        );
 
-    // Remaining capacity
-    const availableCapacity = Math.max(
-        totalCapacity - alreadyAssigned,
-        0
-    );
+        const availableCapacity = Math.max(
+            totalCapacity - alreadyAssigned,
+            0
+        );
 
-    branches.push({
-        branch: capacity.branch,
-        availableCapacity
-    });
-}
+        branches.push({
+            capacity,
+            branch: capacity.branch,
+            availableCapacity
+        });
+    }
 
     branches.sort(
         (a, b) => b.availableCapacity - a.availableCapacity
@@ -59,30 +57,31 @@ for (const capacity of capacities) {
             break;
 
         const assigned = Math.min(
-            item.availableCapacity,
-            remaining
+            remaining,
+            item.availableCapacity
         );
 
+        if (assigned <= 0)
+            continue;
+
+        // Update today's allocated capacity
+        item.capacity.allocatedToday += assigned;
+
+        await item.capacity.save();
+
         allocation.push({
-
             branch: item.branch,
-
             quantityAssigned: assigned
-
         });
 
         remaining -= assigned;
     }
 
     return {
-
         allocation,
-
         remaining
-
     };
 
 };
-
 
 module.exports = allocateOrder;
