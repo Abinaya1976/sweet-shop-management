@@ -1,0 +1,267 @@
+/* ==========================
+   Dashboard Layout
+========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f7fb;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ==========================
+   Sidebar
+========================== */
+
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #7b2cbf, #5a189a);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 35px;
+  font-size: 24px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+  font-size: 16px;
+}
+
+.sidebar a:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.sidebar .active {
+  background: white;
+  color: #7b2cbf;
+  font-weight: bold;
+}
+
+/* ==========================
+   Main Content
+========================== */
+
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================
+   Navbar
+========================== */
+
+.navbar {
+  height: 70px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.08);
+}
+
+.navbar h3 {
+  color: #333;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+
+/* ==========================
+   Dashboard Content
+========================== */
+
+.dashboard-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+/* ==========================
+   Cards
+========================== */
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.08);
+  margin-bottom: 20px;
+}
+
+/* ==========================
+   Statistics Grid
+========================== */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 12px rgba(0,0,0,.08);
+  transition: .3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card h3 {
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.stat-card h1 {
+  color: #7b2cbf;
+}
+
+/* ==========================
+   Tables
+========================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+table th {
+  background: #7b2cbf;
+  color: white;
+  padding: 14px;
+}
+
+table td {
+  padding: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+table tr:hover {
+  background: #f8f8f8;
+}
+
+/* ==========================
+   Buttons
+========================== */
+
+.primary-btn {
+  background: #7b2cbf;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.primary-btn:hover {
+  background: #5a189a;
+}
+
+.secondary-btn {
+  background: #ececec;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ==========================
+   Welcome Card
+========================== */
+
+.welcome-card {
+  background: linear-gradient(135deg,#7b2cbf,#9d4edd);
+  color: white;
+  border-radius: 20px;
+  padding: 35px;
+  margin-bottom: 30px;
+}
+
+.welcome-card h1 {
+  margin-bottom: 10px;
+}
+
+.welcome-card p {
+  opacity: .9;
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:900px){
+
+.sidebar{
+    width:80px;
+}
+
+.sidebar h2{
+    display:none;
+}
+
+.sidebar a{
+    text-align:center;
+    font-size:13px;
+    padding:10px;
+}
+
+.dashboard-content{
+    padding:20px;
+}
+
+}
+
+@media(max-width:700px){
+
+.dashboard-layout{
+    flex-direction:column;
+}
+
+.sidebar{
+    width:100%;
+    flex-direction:row;
+    justify-content:space-around;
+}
+
+.navbar{
+    flex-direction:column;
+    height:auto;
+    padding:15px;
+}
+
+}

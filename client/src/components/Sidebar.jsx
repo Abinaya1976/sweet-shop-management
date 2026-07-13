@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import "./../styles/sidebar.css";
 
 function Sidebar() {
 
@@ -32,26 +31,24 @@ function Sidebar() {
                 Capacity
             </NavLink>
 
+            <NavLink to="/analytics">
+                Analytics
+            </NavLink>
+
             {
                 user?.role === "admin" && (
 
-                    <>
+                    <NavLink to="/users">
 
-                        <NavLink to="/analytics">
-                            Analytics
-                        </NavLink>
+                        Users
 
-                        <NavLink to="/users">
-                            Users
-                        </NavLink>
-
-                    </>
+                    </NavLink>
 
                 )
             }
 
             <button
-                className="logout-btn"
+                className="primary-btn"
                 onClick={logout}
             >
                 Logout

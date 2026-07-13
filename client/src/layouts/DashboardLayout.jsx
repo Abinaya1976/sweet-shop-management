@@ -1,6 +1,6 @@
-import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import "../styles/dashboard.css";
+import Navbar from "../components/Navbar";
+import "../styles/DashboardLayout.css";
 
 function DashboardLayout({ children }) {
 
@@ -10,11 +10,11 @@ function DashboardLayout({ children }) {
 
             <Sidebar />
 
-            <div className="dashboard-content">
+            <div className="dashboard-main">
 
                 <Navbar />
 
-                <div className="page-content">
+                <div className="dashboard-content">
 
                     {children}
 

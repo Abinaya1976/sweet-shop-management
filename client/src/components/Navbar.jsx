@@ -1,38 +1,59 @@
-import "./../styles/navbar.css";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
 
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+
+        logout();
+
+        navigate("/");
+
+    };
+
+    const today = new Date().toLocaleDateString("en-IN", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
 
     return (
 
-        <nav className="navbar">
+        <div className="navbar">
 
-            <div className="navbar-title">
+            <div>
 
-                Smart Sweet Shop
+                <h2>🍬 Smart Sweet Shop</h2>
+
+                <p>{today}</p>
 
             </div>
 
-            <div className="navbar-user">
+            <div className="navbar-right">
 
                 <div>
 
-                    <h4>{user?.name}</h4>
+                    <h4>Welcome, {user?.name}</h4>
 
                     <p>{user?.role}</p>
 
                 </div>
 
-                <img
-                    src="https://i.pravatar.cc/45"
-                    alt="profile"
-                />
+                <button
+                    className="primary-btn"
+                    onClick={handleLogout}
+                >
+                    Logout
+                </button>
 
             </div>
 
-        </nav>
+        </div>
 
     );
 
