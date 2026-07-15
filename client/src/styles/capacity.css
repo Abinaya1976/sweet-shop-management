@@ -1,0 +1,375 @@
+/* ===========================
+   Capacity Management
+=========================== */
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.page-header h1{
+    font-size:30px;
+    color:#2c3e50;
+}
+
+.page-header p{
+    color:#666;
+}
+
+/* ===========================
+   Search Box
+=========================== */
+
+.search-container{
+    margin-bottom:20px;
+}
+
+.search-container input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+}
+
+.search-container input:focus{
+    border-color:#ff9800;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.primary-btn{
+
+    background:#ff9800;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-size:15px;
+
+}
+
+.primary-btn:hover{
+
+    background:#e68900;
+
+}
+
+.edit-btn{
+
+    background:#3498db;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 15px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    margin-right:8px;
+
+}
+
+.edit-btn:hover{
+
+    background:#2980b9;
+
+}
+
+.delete-btn{
+
+    background:#e74c3c;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 15px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+}
+
+.delete-btn:hover{
+
+    background:#c0392b;
+
+}
+
+.cancel-btn{
+
+    background:#777;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+.cancel-btn:hover{
+
+    background:#555;
+
+}
+
+/* ===========================
+   Table
+=========================== */
+
+.table-container{
+
+    background:white;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+}
+
+.capacity-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.capacity-table thead{
+
+    background:#ff9800;
+
+    color:white;
+
+}
+
+.capacity-table th,
+.capacity-table td{
+
+    padding:15px;
+
+    text-align:left;
+
+}
+
+.capacity-table tbody tr{
+
+    border-bottom:1px solid #eee;
+
+}
+
+.capacity-table tbody tr:hover{
+
+    background:#fafafa;
+
+}
+
+.no-data{
+
+    text-align:center;
+
+    padding:25px;
+
+    color:#777;
+
+}
+
+/* ===========================
+   Modal
+=========================== */
+
+.modal{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.5);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
+
+}
+
+.modal-content{
+
+    width:450px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    animation:popup .3s ease;
+
+}
+
+.modal-content h2{
+
+    margin-bottom:20px;
+
+}
+
+.modal-content form{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.modal-content label{
+
+    margin-top:10px;
+
+    margin-bottom:5px;
+
+    font-weight:600;
+
+}
+
+.modal-content input,
+.modal-content select{
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    margin-bottom:12px;
+
+    outline:none;
+
+}
+
+.modal-content input:focus,
+.modal-content select:focus{
+
+    border-color:#ff9800;
+
+}
+
+.form-buttons{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:20px;
+
+}
+
+/* ===========================
+   Animation
+=========================== */
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.8);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:768px){
+
+.page-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:15px;
+
+}
+
+.modal-content{
+
+width:90%;
+
+}
+
+.capacity-table{
+
+font-size:14px;
+
+}
+
+.capacity-table th,
+.capacity-table td{
+
+padding:10px;
+
+}
+
+.form-buttons{
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+.primary-btn,
+.cancel-btn{
+
+width:100%;
+
+}
+
+}

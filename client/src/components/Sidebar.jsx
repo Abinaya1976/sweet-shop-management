@@ -55,6 +55,11 @@ function Sidebar() {
             </button>
 
         </div>
+        {
+    name: "Analytics",
+    path: "/analytics",
+    icon: "📊",
+}
 
     );
 

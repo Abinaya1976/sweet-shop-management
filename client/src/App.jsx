@@ -6,7 +6,7 @@ import Products from "./pages/Products";
 import Orders from "./pages/Orders";
 import Branches from "./pages/Branches";
 import Capacity from "./pages/Capacity";
-
+import Analytics from "./pages/Analytics";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -62,7 +62,16 @@ function App() {
         }
       />
 
-    </Routes>
+      <Route
+
+        path="/analytics"
+    element={
+        <ProtectedRoute>
+            <Analytics />
+        </ProtectedRoute>
+        />
+</Routes>
+    
 
   );
 }
