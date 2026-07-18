@@ -15,6 +15,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+
 export const setAuthToken = (token) => {
   if (token) {
     localStorage.setItem('token', token);
@@ -56,6 +57,12 @@ export const capacityAPI = {
   create: (data) => api.post('/capacities', data),
   update: (id, data) => api.put(`/capacities/${id}`, data),
   delete: (id) => api.delete(`/capacities/${id}`),
+};
+export const userAPI = {
+  getAll: () => api.get("/users"),
+  create: (data) => api.post("/auth/register", data),
+  update: (id, data) => api.put(`/users/${id}`, data),
+  delete: (id) => api.delete(`/users/${id}`),
 };
 
 export default api;

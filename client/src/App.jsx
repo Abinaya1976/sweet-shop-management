@@ -8,6 +8,11 @@ import Branches from "./pages/Branches";
 import Capacity from "./pages/Capacity";
 import Analytics from "./pages/Analytics";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Users from "./pages/Users";
+import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+
 
 function App() {
 
@@ -69,7 +74,40 @@ function App() {
         <ProtectedRoute>
             <Analytics />
         </ProtectedRoute>
-        />
+    }
+    />
+    <Route
+  path="/users"
+  element={
+    <ProtectedRoute>
+      <Users />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/product/:id"
+  element={
+    <ProtectedRoute>
+      <ProductDetails />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/cart"
+  element={
+    <ProtectedRoute>
+      <Cart />
+    </ProtectedRoute>
+  }
+/>
+<Route
+    path="/checkout"
+    element={
+        <ProtectedRoute>
+            <Checkout />
+        </ProtectedRoute>
+    }
+/>
 </Routes>
     
 

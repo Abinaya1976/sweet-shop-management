@@ -14,9 +14,9 @@ function Orders() {
 
         try {
 
-            const res = await orderAPI.getAll();
+           const res = await orderAPI.getAll();
 
-            setOrders(res.data);
+         setOrders(res.data || []);
 
         } catch (error) {
 
@@ -52,43 +52,58 @@ function Orders() {
 
                 </thead>
 
-                <tbody>
+             <tbody>
 
+{
+    orders.length === 0 ? (
+
+        <tr>
+
+            <td colSpan="5">
+
+                No Orders Found
+
+            </td>
+
+        </tr>
+
+    ) : (
+
+        orders.map(order => (
+
+            <tr key={order._id}>
+
+                <td>{order.customerName}</td>
+
+                <td>
                     {
-
-                        orders.map(order => (
-
-                            <tr key={order._id}>
-
-                                <td>{order.customerName}</td>
-
-                                <td>
-                                    {
-                                        typeof order.product === "object"
-                                        ? order.product.name
-                                        : order.product
-                                    }
-                                </td>
-
-                                <td>{order.quantity}</td>
-
-                                <td>{order.status}</td>
-
-                                <td>
-                                    {
-                                        new Date(
-                                            order.deliveryDate
-                                        ).toLocaleDateString()
-                                    }
-                                </td>
-
-                            </tr>
-
-                        ))
-
+                        order.product
+                            ? (typeof order.product === "object"
+                                ? order.product.name
+                                : order.product)
+                            : "No Product"
                     }
+                </td>
 
-                </tbody>
+                <td>{order.quantity}</td>
+
+                <td>{order.status}</td>
+
+                <td>
+                    {
+                        order.deliveryDate
+                            ? new Date(order.deliveryDate).toLocaleDateString()
+                            : "-"
+                    }
+                </td>
+
+            </tr>
+
+        ))
+
+    )
+}
+</tbody>
 
             </table>
 

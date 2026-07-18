@@ -32,7 +32,7 @@ function Sidebar() {
             </NavLink>
 
             <NavLink to="/analytics">
-                Analytics
+               📊 Analytics
             </NavLink>
 
             {
@@ -55,12 +55,7 @@ function Sidebar() {
             </button>
 
         </div>
-        {
-    name: "Analytics",
-    path: "/analytics",
-    icon: "📊",
-}
-
+    
     );
 
 }

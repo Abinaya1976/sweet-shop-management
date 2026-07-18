@@ -1,6 +1,6 @@
 const Order = require("../models/Order");
 const OrderAllocation = require("../models/OrderAllocation");
-const allocateOrder = require("../algorithms/allocationAlgorithm");
+const allocateOrder = require("../services/allocationService");
 // ==========================
 // Create Order
 // ==========================

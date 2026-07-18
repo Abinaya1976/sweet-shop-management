@@ -1,0 +1,146 @@
+.analytics-header{
+
+margin-bottom:30px;
+
+}
+
+.analytics-header h1{
+
+font-size:34px;
+
+margin-bottom:10px;
+
+}
+
+.analytics-header p{
+
+color:#666;
+
+}
+
+/* Charts */
+
+.charts-container{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:25px;
+
+margin-top:30px;
+
+}
+
+.chart-card{
+
+background:white;
+
+padding:20px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.chart-card h2{
+
+margin-bottom:20px;
+
+font-size:22px;
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.charts-container{
+
+grid-template-columns:1fr;
+
+}
+
+}
+/* =========================
+   Recent Orders
+========================= */
+
+.recent-orders{
+
+background:white;
+
+padding:25px;
+
+margin-top:30px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.recent-orders h2{
+
+margin-bottom:20px;
+
+}
+
+.recent-orders-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+.recent-orders-table th{
+
+background:#ff9800;
+
+color:white;
+
+padding:14px;
+
+text-align:left;
+
+}
+
+.recent-orders-table td{
+
+padding:14px;
+
+border-bottom:1px solid #eee;
+
+}
+
+.recent-orders-table tr:hover{
+
+background:#fafafa;
+
+}
+
+.status{
+
+padding:6px 14px;
+
+border-radius:20px;
+
+font-size:14px;
+
+color:white;
+
+}
+
+.completed{
+
+background:#4CAF50;
+
+}
+
+.pending{
+
+background:#FF9800;
+
+}
