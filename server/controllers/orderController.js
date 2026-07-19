@@ -63,6 +63,70 @@ const getOrders = async (req, res) => {
     });
   }
 };
+// ==========================
+// Get Orders For Manager Branch
+// ==========================
+
+const getOrdersByBranch = async (req, res) => {
+
+    try {
+
+        const { branchId } = req.params;
+
+        const allocations = await OrderAllocation.find({
+            branch: branchId
+        })
+        .populate({
+            path: "order",
+            populate: {
+                path: "product"
+            }
+        });
+
+        const orders = allocations.map(item => item.order);
+
+        res.status(200).json(orders);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
+// ==========================
+// Get Orders By Customer
+// ==========================
+
+const getOrdersByCustomer = async (req, res) => {
+
+    try {
+
+        const { customerName } = req.params;
+
+        const orders = await Order.find({
+
+            customerName
+
+        }).populate("product");
+
+        res.status(200).json(orders);
+
+    }
+
+    catch (error) {
+
+        res.status(500).json({
+
+            message: error.message
+
+        });
+
+    }
+
+};
 
 // ==========================
 // Get Order By ID
@@ -133,6 +197,8 @@ const deleteOrder = async (req, res) => {
 module.exports = {
   createOrder,
   getOrders,
+  getOrdersByBranch,
+  getOrdersByCustomer,
   getOrderById,
   updateOrder,
   deleteOrder,
