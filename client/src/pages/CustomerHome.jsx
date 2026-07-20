@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../layouts/DashboardLayout";
 import ProductCard from "../components/ProductCard";
 import { productAPI } from "../services/api";
@@ -6,14 +7,18 @@ import "../styles/customerHome.css";
 
 function CustomerHome() {
 
+    const navigate = useNavigate();
+
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchProducts();
+
+        loadProducts();
+
     }, []);
 
-    const fetchProducts = async () => {
+    const loadProducts = async () => {
 
         try {
 
@@ -41,42 +46,85 @@ function CustomerHome() {
 
                 <div className="customer-header">
 
-                    <h1>🍬 Sweet Shop</h1>
+                    <div>
 
-                    <p>
-                        Fresh sweets prepared daily from all our branches.
-                    </p>
+                        <h1>🍬 Sweet Shop</h1>
 
-                </div>
+                        <p>
 
-                {loading ? (
+                            Order your favourite sweets online.
 
-                    <h2>Loading Products...</h2>
-
-                ) : (
-
-                    <div className="product-grid">
-
-                        {products.length > 0 ? (
-
-                            products.map((product) => (
-
-                                <ProductCard
-                                    key={product._id}
-                                    product={product}
-                                />
-
-                            ))
-
-                        ) : (
-
-                            <h2>No Products Available</h2>
-
-                        )}
+                        </p>
 
                     </div>
 
-                )}
+                    <div className="customer-actions">
+
+                        <button
+                            className="cart-button"
+                            onClick={() => navigate("/cart")}
+                        >
+                            🛒 Cart
+                        </button>
+
+                        <button
+                            className="orders-button"
+                            onClick={() => navigate("/my-orders")}
+                        >
+                            📦 My Orders
+                        </button>
+
+                    </div>
+
+                </div>
+
+                {
+
+                    loading ?
+
+                        (
+
+                            <h2>Loading Products...</h2>
+
+                        )
+
+                        :
+
+                        products.length === 0 ?
+
+                            (
+
+                                <h2>No Products Available</h2>
+
+                            )
+
+                            :
+
+                            (
+
+                                <div className="products-grid">
+
+                                    {
+
+                                        products.map(product => (
+
+                                            <ProductCard
+
+                                                key={product._id}
+
+                                                product={product}
+
+                                            />
+
+                                        ))
+
+                                    }
+
+                                </div>
+
+                            )
+
+                }
 
             </div>
 

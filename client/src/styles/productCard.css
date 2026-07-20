@@ -32,28 +32,17 @@
 
 /* Product Image */
 
-.product-image {
+.product-image img{
 
-    width: 100%;
+    width:100%;
 
-    height: 180px;
+    height:220px;
 
-    background: #fff4e6;
+    object-fit:cover;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 70px;
-
-    border-radius: 10px;
-
-    margin-bottom: 15px;
+    border-radius:10px;
 
 }
-
 /* Product Content */
 
 .product-content h2 {

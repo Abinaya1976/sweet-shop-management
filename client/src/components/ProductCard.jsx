@@ -30,9 +30,12 @@ function ProductCard({ product }) {
 
             <div className="product-image">
 
-                🍬
+    <img
+        src={product.image}
+        alt={product.name}
+    />
 
-            </div>
+</div>
 
             <div className="product-content">
 

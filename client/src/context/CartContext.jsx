@@ -3,9 +3,7 @@ import { createContext, useContext, useState } from "react";
 const CartContext = createContext();
 
 export const useCart = () => {
-
     return useContext(CartContext);
-
 };
 
 export const CartProvider = ({ children }) => {
@@ -16,18 +14,18 @@ export const CartProvider = ({ children }) => {
     const addToCart = (product) => {
 
         const existingItem = cart.find(
-            item => item._id === product._id
+            (item) => item._id === product._id
         );
 
         if (existingItem) {
 
             setCart(
-                cart.map(item =>
+                cart.map((item) =>
                     item._id === product._id
                         ? {
-                            ...item,
-                            quantity: item.quantity + 1
-                        }
+                              ...item,
+                              quantity: item.quantity + 1,
+                          }
                         : item
                 )
             );
@@ -38,8 +36,8 @@ export const CartProvider = ({ children }) => {
                 ...cart,
                 {
                     ...product,
-                    quantity: 1
-                }
+                    quantity: 1,
+                },
             ]);
 
         }
@@ -49,9 +47,7 @@ export const CartProvider = ({ children }) => {
     // Remove Product
     const removeFromCart = (id) => {
 
-        setCart(
-            cart.filter(item => item._id !== id)
-        );
+        setCart(cart.filter((item) => item._id !== id));
 
     };
 
@@ -59,12 +55,12 @@ export const CartProvider = ({ children }) => {
     const increaseQuantity = (id) => {
 
         setCart(
-            cart.map(item =>
+            cart.map((item) =>
                 item._id === id
                     ? {
-                        ...item,
-                        quantity: item.quantity + 1
-                    }
+                          ...item,
+                          quantity: item.quantity + 1,
+                      }
                     : item
             )
         );
@@ -75,18 +71,22 @@ export const CartProvider = ({ children }) => {
     const decreaseQuantity = (id) => {
 
         setCart(
-            cart.map(item =>
-                item._id === id && item.quantity > 1
+            cart.map((item) =>
+                item._id === id
                     ? {
-                        ...item,
-                        quantity: item.quantity - 1
-                    }
+                          ...item,
+                          quantity:
+                              item.quantity > 1
+                                  ? item.quantity - 1
+                                  : 1,
+                      }
                     : item
             )
         );
 
     };
 
+    // Empty Cart
     const clearCart = () => {
 
         setCart([]);
@@ -102,12 +102,10 @@ export const CartProvider = ({ children }) => {
                 removeFromCart,
                 increaseQuantity,
                 decreaseQuantity,
-                clearCart
+                clearCart,
             }}
         >
-
             {children}
-
         </CartContext.Provider>
 
     );

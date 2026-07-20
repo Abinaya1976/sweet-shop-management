@@ -1,63 +1,31 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
+
 import DashboardLayout from "../layouts/DashboardLayout";
 import CartItem from "../components/CartItem";
+
+import { useCart } from "../context/CartContext";
+
 import "../styles/cart.css";
 
 function Cart() {
 
-    // Temporary cart data
-    // Later this will come from Cart Context
+    const {
 
-    const [cartItems, setCartItems] = useState([
-        {
-            _id: 1,
-            name: "Laddu",
-            price: 20,
-            quantity: 2
-        },
-        {
-            _id: 2,
-            name: "Mysore Pak",
-            price: 35,
-            quantity: 1
-        }
-    ]);
+        cart,
 
-    const increaseQuantity = (id) => {
+        increaseQuantity,
 
-        setCartItems(
-            cartItems.map(item =>
-                item._id === id
-                    ? { ...item, quantity: item.quantity + 1 }
-                    : item
-            )
-        );
+        decreaseQuantity,
 
-    };
+        removeFromCart
 
-    const decreaseQuantity = (id) => {
+    } = useCart();
 
-        setCartItems(
-            cartItems.map(item =>
-                item._id === id && item.quantity > 1
-                    ? { ...item, quantity: item.quantity - 1 }
-                    : item
-            )
-        );
+    const total = cart.reduce(
 
-    };
+        (sum, item) =>
 
-    const removeItem = (id) => {
-
-        setCartItems(
-            cartItems.filter(item => item._id !== id)
-        );
-
-    };
-
-    const total = cartItems.reduce(
-
-        (sum, item) => sum + item.price * item.quantity,
+            sum + item.price * item.quantity,
 
         0
 
@@ -73,17 +41,36 @@ function Cart() {
 
                 {
 
-                    cartItems.length === 0 ?
+                    cart.length === 0 ? (
 
-                        <h2>Your cart is empty.</h2>
+                        <div className="empty-cart">
 
-                        :
+                            <h2>Your cart is empty.</h2>
+
+                            <p>
+
+                                Add some delicious sweets to your cart.
+
+                            </p>
+
+                            <Link
+                                to="/customer"
+                                className="checkout-btn"
+                            >
+
+                                Continue Shopping
+
+                            </Link>
+
+                        </div>
+
+                    ) : (
 
                         <>
 
                             {
 
-                                cartItems.map(item => (
+                                cart.map((item) => (
 
                                     <CartItem
 
@@ -95,7 +82,7 @@ function Cart() {
 
                                         decreaseQuantity={decreaseQuantity}
 
-                                        removeItem={removeItem}
+                                        removeFromCart={removeFromCart}
 
                                     />
 
@@ -111,15 +98,23 @@ function Cart() {
 
                                 </h2>
 
-                                <button className="checkout-btn">
+                                <Link
+
+                                    to="/checkout"
+
+                                    className="checkout-btn"
+
+                                >
 
                                     Proceed To Checkout
 
-                                </button>
+                                </Link>
 
                             </div>
 
                         </>
+
+                    )
 
                 }
 

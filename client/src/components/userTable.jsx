@@ -6,7 +6,7 @@ function UserTable({
 
     deleteUser,
 
-    setSelectedUser,
+    setSelectedUser
 
 }) {
 
@@ -18,130 +18,109 @@ function UserTable({
 
     return (
 
-        <div className="table-container">
+        <table className="user-table">
 
-            <table className="user-table">
+            <thead>
 
-                <thead>
+                <tr>
 
-                    <tr>
+                    <th>Name</th>
 
-                        <th>Name</th>
+                    <th>Email</th>
 
-                        <th>Email</th>
+                    <th>Role</th>
 
-                        <th>Role</th>
+                    <th>Branch</th>
 
-                        <th>Created</th>
+                    <th>Actions</th>
 
-                        <th>Actions</th>
+                </tr>
 
-                    </tr>
+            </thead>
 
-                </thead>
+            <tbody>
 
-                <tbody>
+                {
 
-                    {
+                    users.map(user => (
 
-                        users.length === 0 ? (
+                        <tr key={user._id}>
 
-                            <tr>
+                            <td>
 
-                                <td colSpan="5">
+                                {user.name}
 
-                                    No Users Found
+                            </td>
 
-                                </td>
+                            <td>
 
-                            </tr>
+                                {user.email}
 
-                        ) : (
+                            </td>
 
-                            users.map((user) => (
+                            <td>
 
-                                <tr key={user._id}>
+                                {user.role}
 
-                                    <td>{user.name}</td>
+                            </td>
 
-                                    <td>{user.email}</td>
+                            <td>
 
-                                    <td>
+                                {
 
-                                        <span className={`role ${user.role}`}>
+                                    user.role === "manager"
 
-                                            {user.role}
+                                        ? user.branchId?.branchName || "Not Assigned"
 
-                                        </span>
+                                        : "-"
 
-                                    </td>
+                                }
 
-                                    <td>
+                            </td>
 
-                                        {
+                            <td>
 
-                                            new Date(
+                                <button
 
-                                                user.createdAt
+                                    onClick={() =>
+                                        setSelectedUser(user)
+                                    }
 
-                                            ).toLocaleDateString()
+                                >
 
-                                        }
+                                    Edit
 
-                                    </td>
+                                </button>
 
-                                    <td>
+                                <button
 
-                                        <button
+                                    className="delete-btn"
 
-                                            className="edit-btn"
+                                    onClick={() =>
+                                        deleteUser(user._id)
+                                    }
 
-                                            onClick={() =>
+                                >
 
-                                                setSelectedUser(user)
+                                    Delete
 
-                                            }
+                                </button>
 
-                                        >
+                            </td>
 
-                                            ✏ Edit
+                        </tr>
 
-                                        </button>
+                    ))
 
-                                        <button
+                }
 
-                                            className="delete-btn"
+            </tbody>
 
-                                            onClick={() =>
-
-                                                deleteUser(user._id)
-
-                                            }
-
-                                        >
-
-                                            🗑 Delete
-
-                                        </button>
-
-                                    </td>
-
-                                </tr>
-
-                            ))
-
-                        )
-
-                    }
-
-                </tbody>
-
-            </table>
-
-        </div>
+        </table>
 
     );
 
 }
 
+export default UserTable;
 export default UserTable;

@@ -6,7 +6,7 @@ function CartItem({
 
     decreaseQuantity,
 
-    removeItem
+    removeFromCart
 
 }) {
 
@@ -68,7 +68,7 @@ function CartItem({
 
                 className="remove-btn"
 
-                onClick={() => removeItem(item._id)}
+                onClick={() => removeFromCart(item._id)}
 
             >
 

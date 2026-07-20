@@ -1,55 +1,42 @@
 import { useEffect, useState } from "react";
+import { branchAPI } from "../services/api";
 import api from "../services/api";
 
-function UserForm({
+function UserForm({ fetchUsers }) {
 
-    fetchUsers,
-
-    selectedUser,
-
-    setSelectedUser,
-
-}) {
+    const [branches, setBranches] = useState([]);
 
     const [formData, setFormData] = useState({
 
         name: "",
-
         email: "",
-
         password: "",
-
         role: "customer",
+        branchId: ""
 
     });
 
-    // ------------------------
-    // Fill form while editing
-    // ------------------------
-
     useEffect(() => {
 
-        if (selectedUser) {
+        loadBranches();
 
-            setFormData({
+    }, []);
 
-                name: selectedUser.name,
+    const loadBranches = async () => {
 
-                email: selectedUser.email,
+        try {
 
-                password: "",
+            const res = await branchAPI.getAll();
 
-                role: selectedUser.role,
+            setBranches(res.data);
 
-            });
+        } catch (error) {
+
+            console.log(error);
 
         }
 
-    }, [selectedUser]);
-
-    // ------------------------
-    // Handle Input Change
-    // ------------------------
+    };
 
     const handleChange = (e) => {
 
@@ -57,15 +44,11 @@ function UserForm({
 
             ...formData,
 
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value
 
         });
 
     };
-
-    // ------------------------
-    // Submit Form
-    // ------------------------
 
     const handleSubmit = async (e) => {
 
@@ -73,67 +56,33 @@ function UserForm({
 
         try {
 
-            if (selectedUser) {
+            await api.post(
 
-                // UPDATE USER
+                "/users",
 
-                await api.put(
+                formData
 
-                    `/users/${selectedUser._id}`,
+            );
 
-                    formData
-
-                );
-
-                alert("User Updated Successfully");
-
-            }
-
-            else {
-
-                // CREATE USER
-
-                await api.post(
-
-                    "/auth/register",
-
-                    formData
-
-                );
-
-                alert("User Added Successfully");
-
-            }
+            alert("User Created Successfully");
 
             fetchUsers();
-
-            setSelectedUser(null);
 
             setFormData({
 
                 name: "",
-
                 email: "",
-
                 password: "",
-
                 role: "customer",
+                branchId: ""
 
             });
 
-        }
+        } catch (error) {
 
-        catch (error) {
+            console.log(error);
 
-            console.error(error);
-
-            alert(
-
-                error.response?.data?.message ||
-
-                "Something went wrong"
-
-            );
+            alert("Failed");
 
         }
 
@@ -143,19 +92,7 @@ function UserForm({
 
         <div className="user-form">
 
-            <h2>
-
-                {
-
-                    selectedUser
-
-                        ? "Update User"
-
-                        : "Add New User"
-
-                }
-
-            </h2>
+            <h2>Create User</h2>
 
             <form onSubmit={handleSubmit}>
 
@@ -165,7 +102,7 @@ function UserForm({
 
                     name="name"
 
-                    placeholder="Enter Name"
+                    placeholder="Name"
 
                     value={formData.name}
 
@@ -181,7 +118,7 @@ function UserForm({
 
                     name="email"
 
-                    placeholder="Enter Email"
+                    placeholder="Email"
 
                     value={formData.email}
 
@@ -202,6 +139,8 @@ function UserForm({
                     value={formData.password}
 
                     onChange={handleChange}
+
+                    required
 
                 />
 
@@ -235,23 +174,55 @@ function UserForm({
 
                 </select>
 
-                <button
+                {
 
-                    type="submit"
+                    formData.role === "manager" &&
 
-                    className="primary-btn"
+                    <select
 
-                >
+                        name="branchId"
 
-                    {
+                        value={formData.branchId}
 
-                        selectedUser
+                        onChange={handleChange}
 
-                            ? "Update User"
+                        required
 
-                            : "Add User"
+                    >
 
-                    }
+                        <option value="">
+
+                            Select Branch
+
+                        </option>
+
+                        {
+
+                            branches.map(branch => (
+
+                                <option
+
+                                    key={branch._id}
+
+                                    value={branch._id}
+
+                                >
+
+                                    {branch.branchName}
+
+                                </option>
+
+                            ))
+
+                        }
+
+                    </select>
+
+                }
+
+                <button>
+
+                    Create User
 
                 </button>
 

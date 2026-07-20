@@ -1,85 +1,119 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {useAuth} from"../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
 import "../styles/login.css";
 
 function Login() {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+    const { login } = useAuth();
 
-  const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
 
-  const [error, setError] = useState("");
+    const [password, setPassword] = useState("");
 
-  const {login}=useAuth();
+    const [error, setError] = useState("");
 
-  const handleLogin = async (e) => {
+    const handleLogin = async (e) => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    try {
+        setError("");
 
-      const response = await api.post("/auth/login", {
-        email,
-        password,
-      });
+        try {
 
-      
-      login(
-        response.data.token,
-        response.data.user
-      );
+            const response = await api.post("/auth/login", {
+                email,
+                password,
+            });
 
-      navigate("/dashboard");
-     
+            const { token, user } = response.data;
 
-    } catch (err) {
+            // Save user in Auth Context
+            login(token, user);
 
-      setError(
-        err.response?.data?.message || "Login Failed"
-      );
+            // Redirect based on role
+            if (user.role === "admin") {
 
-    }
-  };
+                navigate("/admin/dashboard");
 
-  return (
+            }
+            else if (user.role === "manager") {
 
-    <div className="login-container">
+                navigate("/manager/dashboard");
 
-      <form className="login-form" onSubmit={handleLogin}>
+            }
+            else {
 
-        <h1>Smart Sweet Shop</h1>
+                navigate("/home");
 
-        <h2>Login</h2>
+            }
 
-        {error && <p>{error}</p>}
+        } catch (err) {
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-        />
+            setError(
+                err.response?.data?.message || "Login Failed"
+            );
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
-        />
+        }
 
-        <button type="submit">
-          Login
-        </button>
+    };
 
-      </form>
+    return (
 
-    </div>
+        <div className="login-container">
 
-  );
+            <form
+                className="login-form"
+                onSubmit={handleLogin}
+            >
+
+                <h1>Sweetie Pies</h1>
+
+                <h2>Login</h2>
+
+                {error && (
+
+                    <p className="error-message">
+                        {error}
+                    </p>
+
+                )}
+
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) =>
+                        setEmail(e.target.value)
+                    }
+                    required
+                />
+
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) =>
+                        setPassword(e.target.value)
+                    }
+                    required
+                />
+
+                <button type="submit">
+
+                    Login
+
+                </button>
+
+            </form>
+
+        </div>
+
+    );
+
 }
 
 export default Login;

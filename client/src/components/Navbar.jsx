@@ -1,11 +1,22 @@
+import { Link, useNavigate } from "react-router-dom";
+import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
+import SearchBar from "./SearchBar";
+import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import "../styles/navbar.css";
 
 function Navbar() {
+
+    const { cart } = useCart();
 
     const { user, logout } = useAuth();
 
     const navigate = useNavigate();
+
+    const totalItems = cart.reduce(
+        (sum, item) => sum + item.quantity,
+        0
+    );
 
     const handleLogout = () => {
 
@@ -15,45 +26,106 @@ function Navbar() {
 
     };
 
-    const today = new Date().toLocaleDateString("en-IN", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-    });
-
     return (
 
-        <div className="navbar">
+        <header className="navbar">
 
-            <div>
+            {/* Top Section */}
 
-                <h2>🍬 Smart Sweet Shop</h2>
+            <div className="navbar-top">
 
-                <p>{today}</p>
+                <div
+                    className="logo"
+                    onClick={() => navigate("/home")}
+                >
 
-            </div>
+                    <h1>🧁 Sweetie Pies</h1>
 
-            <div className="navbar-right">
-
-                <div>
-
-                    <h4>Welcome, {user?.name}</h4>
-
-                    <p>{user?.role}</p>
+                    <span>Happiness in Every Bite</span>
 
                 </div>
 
-                <button
-                    className="primary-btn"
-                    onClick={handleLogout}
-                >
-                    Logout
-                </button>
+                <SearchBar />
+
+                <div className="navbar-right">
+
+                    <Link
+                        to="/cart"
+                        className="cart-icon"
+                    >
+
+                        <FaShoppingCart />
+
+                        <span className="cart-count">
+
+                            {totalItems}
+
+                        </span>
+
+                    </Link>
+
+                    <div className="user-info">
+
+                        <FaUserCircle size={25} />
+
+                        <span>
+
+                            {user?.name}
+
+                        </span>
+
+                    </div>
+
+                    <button
+                        className="logout-btn"
+                        onClick={handleLogout}
+                    >
+
+                        Logout
+
+                    </button>
+
+                </div>
 
             </div>
 
-        </div>
+            {/* Bottom Menu */}
+
+            <nav className="navbar-menu">
+
+                <Link to="/home">
+
+                    Home
+
+                </Link>
+
+                <Link to="/about">
+
+                    About
+
+                </Link>
+
+                <Link to="/home">
+
+                    All Sweets
+
+                </Link>
+
+                <Link to="/my-orders">
+
+                    My Orders
+
+                </Link>
+
+                <Link to="/contact">
+
+                    Contact
+
+                </Link>
+
+            </nav>
+
+        </header>
 
     );
 

@@ -1,0 +1,37 @@
+.product-grid-section{
+
+    padding:70px 8%;
+
+    background:#ffffff;
+
+}
+
+.product-grid-section h2{
+
+    text-align:center;
+
+    font-size:40px;
+
+    color:#8E2DE2;
+
+}
+
+.product-grid-section p{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:50px;
+
+}
+
+.product-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:35px;
+
+}
