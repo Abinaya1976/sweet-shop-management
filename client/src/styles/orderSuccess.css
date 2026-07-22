@@ -1,0 +1,105 @@
+.success-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:70px;
+
+    background:#fff8f0;
+
+}
+
+.success-card{
+
+    background:white;
+
+    width:700px;
+
+    padding:50px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+}
+
+.success-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    background:#28a745;
+
+    color:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:45px;
+
+    margin-bottom:25px;
+
+}
+
+.order-info{
+
+    margin:35px 0;
+
+    text-align:left;
+
+}
+
+.order-info p{
+
+    margin:12px 0;
+
+}
+
+.success-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.success-buttons button{
+
+    padding:15px 25px;
+
+    border:none;
+
+    background:#ff9800;
+
+    color:white;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+.success-buttons button:hover{
+
+    background:#e68900;
+
+}

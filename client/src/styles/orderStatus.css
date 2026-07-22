@@ -1,0 +1,49 @@
+.status{
+
+    padding:8px 18px;
+
+    border-radius:20px;
+
+    color:white;
+
+    font-weight:600;
+
+    font-size:14px;
+
+}
+
+.pending{
+
+    background:#f39c12;
+
+}
+
+.allocated{
+
+    background:#3498db;
+
+}
+
+.preparing{
+
+    background:#9b59b6;
+
+}
+
+.delivery{
+
+    background:#2ecc71;
+
+}
+
+.delivered{
+
+    background:#27ae60;
+
+}
+
+.cancelled{
+
+    background:#e74c3c;
+
+}

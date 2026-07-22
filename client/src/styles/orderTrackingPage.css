@@ -1,0 +1,53 @@
+.tracking-page{
+
+    width:90%;
+
+    margin:auto;
+
+    padding:40px 0;
+
+}
+
+.tracking-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+
+    margin-top:20px;
+
+}
+
+.tracking-card h2{
+
+    margin-bottom:20px;
+
+}
+
+.tracking-card p{
+
+    margin:10px 0;
+
+}
+
+.tracking-btn{
+
+    background:#ff6b35;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:10px 20px;
+
+    border-radius:8px;
+
+    display:inline-block;
+
+    margin-top:20px;
+
+}

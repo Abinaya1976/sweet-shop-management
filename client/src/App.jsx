@@ -20,6 +20,7 @@ import Branches from "./pages/Branches";
 import Capacity from "./pages/Capacity";
 import Analytics from "./pages/Analytics";
 import Users from "./pages/Users";
+import ProductGrid from "./components/productGrid";
 
 // Manager Pages
 import ManagerDashboard from "./pages/ManagerDashboard";
@@ -27,6 +28,11 @@ import ManagerOrders from "./pages/ManagerOrders";
 
 // Protected Route
 import ProtectedRoute from "./components/ProtectedRoute";
+import OrderTrackingPage from "./pages/OrderTrackingPage";
+import Profile from "./pages/Profile";
+import OrderSuccess from "./pages/OrderSuccess";
+import Invoice from "./pages/Invoice";
+
 
 function App() {
   return (
@@ -192,6 +198,39 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route
+    path="/tracking/:id"
+    element={
+        <ProtectedRoute>
+            <OrderTrackingPage />
+        </ProtectedRoute>
+    }
+/>
+<Route
+    path="/profile"
+    element={
+        <ProtectedRoute>
+            <Profile />
+        </ProtectedRoute>
+    }
+/>
+<Route
+    path="/order-success"
+    element={
+        <ProtectedRoute>
+            <OrderSuccess />
+        </ProtectedRoute>
+    }
+/>
+
+<Route
+    path="/invoice"
+    element={
+        <ProtectedRoute>
+            <Invoice />
+        </ProtectedRoute>
+    }
+/>
     </Routes>
   );
 }
