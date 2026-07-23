@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import "../styles/productCard.css";
 import "../styles/customerHome.css";
+import imageMap from "../utils/imageMap";
+
 function ProductCard({ product }) {
 
     const navigate = useNavigate();
@@ -31,9 +33,9 @@ function ProductCard({ product }) {
             <div className="product-image">
 
     <img
-        src={product.image}
-        alt={product.name}
-    />
+    src={`http://localhost:5000/uploads/${product.image}`}
+    alt={product.name}
+/>
 
 </div>
 
